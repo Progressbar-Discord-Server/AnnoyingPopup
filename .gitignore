@@ -1,0 +1,8 @@
+config.json
+markov.txt
+postedMessageIDs.json
+DO_NOT_COMMIT/
+node_modules/
+canUseFullSentience.json
+convos/
+package-lock.json

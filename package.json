@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "cleverbot-free": "^1.1.11",
+    "discord.js": "^14.1.2",
+    "js-markov": "^3.0.3"
+  },
+  "name": "annoyingpopup",
+  "version": "1.0.0",
+  "description": "Markov Chains and Cleverbot Discord Bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm i",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "stuartt_mcoded",
+  "license": "GPL-3.0-or-later"
+}
