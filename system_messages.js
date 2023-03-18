@@ -9,6 +9,7 @@ function system_message(type){
         
 ***===============================================***`} break;
         case 'dm_can_use': {msg += `✅ You can now use Annoying Popup DMs!`} break;
+        case 'dm_export': {msg += `✅ DM exported!`} break;
         case 'txt_already_agreed': {msg += `You have already agreed to Cleverbot's rules!`} break;
         case 'txt_agreed': {msg += `✅ You can now use \`--full-sentience\`!`} break;
         case 'welcome_dm': {msg += `Annoying Popup DMs use the Cleverbot (<https://cleverbot.com/>) API. Before using it, please read the following:

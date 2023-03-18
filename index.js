@@ -52,6 +52,8 @@ client.on('messageCreate', async message => {
             if (message.content == "--reset-convo") {
                 fs.writeFileSync(`./convos/${message.author.id}.json`, "[]")
                 message.reply(system_message('dm_reset'))
+            } else if (message.content == "--export-convo") {
+                message.reply(system_message('dm_export'), { files: [`./convos/${message.author.id}.json`] })
             } else {
                 let jsondata = fs.readFileSync(`./convos/${message.author.id}.json`)
 				jsondata = JSON.parse(jsondata)
