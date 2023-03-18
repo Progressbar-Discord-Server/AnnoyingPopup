@@ -85,7 +85,7 @@ client.on('messageCreate', async message => {
     //Threads
     let threadlist = JSON.parse(fs.readFileSync("./convos/threads/list.json"))
     if(threadlist.includes(message.channel.id)){
-        await require('./src/thread.js').threads(cleverbot, message)
+        return await require('./src/thread.js').threads(cleverbot, message)
     }
 
     //Text Channel Functions
