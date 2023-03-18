@@ -1,4 +1,6 @@
 {
-    "DISCORD_token": "TOKEN_HERE",
-    "DISCORD_clientId": "123456789012345"
+    "token": "TOKEN_HERE",
+    "clientId": "123456789012345",
+    "allowedChannels": ["channel", "ids", "here"],
+    "readChannels": ["channel", "ids", "here"]
 }

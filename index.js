@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, GatewayIntentBits, Partials, ActivityType } = require('discord.js');
-const { DISCORD_clientId, DISCORD_token } = require('./config.json');
+const { clientId, token, allowedChannels, readChannels } = require('./config.json');
 const { system_message } = require('./system_messages.js')
 const Markov = require('js-markov');
 const cleverbot = require("cleverbot-free");
@@ -77,8 +77,7 @@ client.on('messageCreate', async message => {
     }
 
     //Text Channel Functions
-    //TODO: Remake this to support an array of allowed channels
-    if(message.content.startsWith("<@511352076346064906>") && message.channel.id == "990334332231090217") {
+    if(message.content.startsWith("<@511352076346064906>") && allowedChannels.includes(message.channel.id)) {
         if (message.content.includes("--understood-and-agreed")) { //Agree to Cleverbot's rules
             //load agreed users array
             let jsondata = fs.readFileSync("./canUseFullSentience.json")
@@ -131,8 +130,7 @@ client.on('messageCreate', async message => {
     }
 
     //Message logging from the server
-    //TODO: Remake this to support an array of allowed channels
-    if (message.channel.id == "990334324362575892" || message.channel.id == "990334326526853130" || message.channel.id == "990334317337120808") {
+    if (readChannels.includes(message.channel.id)) {
         let msg = message.content
         
         const allMessage = fs.readFileSync('markov.txt', 'utf8');
@@ -146,7 +144,7 @@ client.on('messageCreate', async message => {
 })
 
 //login to discord
-client.login(DISCORD_token);
+client.login(token);
 
 //error handlrz
 process.on('uncaughtException', (error, origin) => {
