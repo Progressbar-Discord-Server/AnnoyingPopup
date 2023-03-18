@@ -77,8 +77,8 @@ client.on('messageCreate', async message => {
     }
 
     //Text Channel Functions
-    if(message.content.startsWith("<@511352076346064906>") && allowedChannels.includes(message.channel.id)) {
-        if (message.content.includes("--understood-and-agreed")) { //Agree to Cleverbot's rules
+    if(message.content.startsWith(`<@${clientId}>`) && allowedChannels.includes(message.channel.id)) {
+       if (message.content.includes("--understood-and-agreed")) { //Agree to Cleverbot's rules
             //load agreed users array
             let jsondata = fs.readFileSync("./canUseFullSentience.json")
 			jsondata = JSON.parse(jsondata)
@@ -99,7 +99,7 @@ client.on('messageCreate', async message => {
 			jsondata = JSON.parse(jsondata)
 
 			if(jsondata.includes(message.author.id)) { //if they can use it
-                let mymessage = message.content.replace("<@511352076346064906>", "") //remove the mention
+                let mymessage = message.content.replace(`<@${clientId}>`, "") //remove the mention
 				mymessage = mymessage.replace("--full-sentience", "") //remove the --full-sentience
                 //get cleverbot reply
 				cleverbot(mymessage).then(response => message.reply(response));
