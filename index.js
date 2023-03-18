@@ -23,6 +23,8 @@ client.once('ready', async() => {
 
 	if(!fs.existsSync("./convos")) {
 		fs.mkdirSync("./convos")
+        fs.mkdirSync("./convos/threads")
+        fs.writeFileSync("./convos/threads/list.json", "[]")
 	}
 
 	console.log(`✅ Signed in as ${client.user.tag}! \n`);
@@ -30,7 +32,11 @@ client.once('ready', async() => {
 });
 
 
-//Message Generation
+//Message Commands
+
+/***
+ * TODO: MOVE THESE TO SEPARATE FILES!!!
+ */
 client.on('messageCreate', async message => {
 	if (message.author.bot) return;
 
@@ -76,9 +82,19 @@ client.on('messageCreate', async message => {
         }
     }
 
+    //Threads
+    let threadlist = JSON.parse(fs.readFileSync("./convos/threads/list.json"))
+    if(threadlist.includes(message.channel.id)){
+        await require('./src/thread.js').threads(cleverbot, message)
+    }
+
     //Text Channel Functions
     if(message.content.startsWith(`<@${clientId}>`) && allowedChannels.includes(message.channel.id)) {
-       if (message.content.includes("--understood-and-agreed")) { //Agree to Cleverbot's rules
+        if (message.content.includes("--help")) {
+            message.reply(system_message("gen_help"))
+        } else if (message.content.includes("--thread")) { //Threads creation
+            await require('./src/thread.js').createThread(message, clientId)
+        } else if (message.content.includes("--understood-and-agreed")) { //Agree to Cleverbot's rules
             //load agreed users array
             let jsondata = fs.readFileSync("./canUseFullSentience.json")
 			jsondata = JSON.parse(jsondata)
