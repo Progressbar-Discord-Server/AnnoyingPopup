@@ -9,7 +9,9 @@ function system_message(type){
         
 ***===============================================***`} break;
         case 'dm_can_use': {msg += `✅ You can now use Annoying Popup DMs!`} break;
-        case 'dm_export': {msg += `✅ DM exported!`} break;
+        case 'dm_export': {msg += `✅ DM exported!
+        
+This is a JSON array that contains the message history between you and Cleverbot. Each even line is your message, each odd line is a Cleverbot message.`} break;
         case 'txt_already_agreed': {msg += `You have already agreed to Cleverbot's rules!`} break;
         case 'txt_agreed': {msg += `✅ You can now use \`--full-sentience\`!`} break;
         case 'welcome_dm': {msg += `Annoying Popup DMs use the Cleverbot (<https://cleverbot.com/>) API. Before using it, please read the following:
@@ -27,7 +29,9 @@ function system_message(type){
 \`\`\`
 Unlike \`--full-sentience\`, Annoying Popup **does** store any messages relating to Cleverbot.
         
-You can reset your conversation with \`--reset-convo\`
+You can reset your conversation history with \`--reset-convo\`
+
+You can export your conversation history with \`--export-convo\`
         
 If you agree to the following, Say \`--understood-and-agreed\`.`} break;
         case 'welcome_txt': {msg += `The \`--full-sentience\` mode uses the Cleverbot (<https://cleverbot.com/>) API. Before using it, please read the following:
