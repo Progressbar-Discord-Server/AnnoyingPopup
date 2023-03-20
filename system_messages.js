@@ -33,7 +33,8 @@ This is a JSON array that contains the message history between you and Cleverbot
 
 All messages in this thread (even if made by other members) will be replied to by Cleverbot.
 
-- Use \`--delete-thread\` to delete this thread (thread owner only).`} break;
+Use \`--delete-thread\` to delete this thread (thread owner only).
+Use \`--reset-convo\` to reset this thread's convo (thread owner only).`} break;
         case 'welcome_dm': {msg += `Annoying Popup DMs use the Cleverbot (<https://cleverbot.com/>) API. Before using it, please read the following:
 
 \`\`\`diff
