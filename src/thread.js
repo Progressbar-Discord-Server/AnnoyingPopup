@@ -7,10 +7,10 @@ async function threads(cleverbot, message) {
     let thisthread = JSON.parse(fs.readFileSync(`./convos/threads/${message.channel.id}.json`))
 
     if (message.content == "--claim-thread") { //STAFF - claim thread
-        if (botManagers.includes(message.author) ) { 
+        if (botManagers.includes(message.author.id) ) { 
             //You can do that!
             message.reply(system_message("thd_STAFFONLY_claimed"))
-            thisthread.author = message.author
+            thisthread.author = message.author.id
             thisthread = JSON.stringify(thisthread)
             fs.writeFileSync(`./convos/threads/${message.channel.id}.json`, thisthread)
             return;
