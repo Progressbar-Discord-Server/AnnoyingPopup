@@ -1,13 +1,24 @@
 const fs = require('node:fs');
 const { system_message } = require('../system_messages.js')
-const { PermissionsBitField } = require('discord.js');
+const { botManagers } = require("../config.json")
 
 async function threads(cleverbot, message) {
     //load thread data
     let thisthread = JSON.parse(fs.readFileSync(`./convos/threads/${message.channel.id}.json`))
 
-    if (message.content == "--delete-thread") { //Delete thread (thread owner command)
-        if (message.author == thisthread.author || message.author.permissions.has(PermissionsBitField.Flags.ManageThreads)) { 
+    if (message.content == "--claim-thread") { //STAFF - claim thread
+        if (botManagers.includes(message.author) ) { 
+            //You can do that!
+            message.reply(system_message("thd_STAFFONLY_claimed"))
+            thisthread.author = message.author
+            thisthread = JSON.stringify(thisthread)
+            fs.writeFileSync(`./convos/threads/${message.channel.id}.json`, thisthread)
+            return;
+        } else {
+            message.reply(system_message("thd_err_unauth")) //You can't do that!
+        }
+    } else if (message.content == "--delete-thread") { //Delete thread (thread owner command)
+        if (message.author == thisthread.author) { 
             //You can do that!
             fs.unlinkSync(`./convos/threads/${message.channel.id}.json`)
             await message.channel.delete();
@@ -16,7 +27,7 @@ async function threads(cleverbot, message) {
             message.reply(system_message("thd_err_unauth")) //You can't do that!
         }
     } else if (message.content == "--reset-convo") {
-        if (message.author == thisthread.author || message.author.permissions.has(PermissionsBitField.Flags.ManageThreads)) {
+        if (message.author == thisthread.author) {
             thisthread.context = []
             thisthread = JSON.stringify(thisthread)
             fs.writeFileSync(`./convos/threads/${message.channel.id}.json`, thisthread)

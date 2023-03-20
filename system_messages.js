@@ -17,6 +17,7 @@ This is a JSON array that contains the message history between you and Cleverbot
         case 'txt_agreed': {msg += `✅ You can now use \`--full-sentience\`!`} break;
         case 'thd_creating': {msg += `🔃 Creating thread...`} break;
         case 'thd_err_unauth': {msg += `❌ You cannot do that!`} break;
+        case 'thd_STAFFONLY_claimed': {msg += `⚒️ Thread claimed!`} break;
         case 'thd_err_invalidName': {msg += `❌ Invalid thread name! Must be at least 5 characters long!`} break;
         case 'gen_help': {msg += `You can use my commands by pinging me and then followed by the command you want to run.
 
