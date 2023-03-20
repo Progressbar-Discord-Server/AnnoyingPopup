@@ -1,12 +1,13 @@
 const fs = require('node:fs');
 const { system_message } = require('../system_messages.js')
+const { PermissionsBitField } = require('discord.js');
 
 async function threads(cleverbot, message) {
     //load thread data
     let thisthread = JSON.parse(fs.readFileSync(`./convos/threads/${message.channel.id}.json`))
 
     if (message.content == "--delete-thread") { //Delete thread (thread owner command)
-        if (message.author == thisthread.author) { 
+        if (message.author == thisthread.author || message.author.permissions.has(PermissionsBitField.Flags.ManageThreads)) { 
             //You can do that!
             fs.unlinkSync(`./convos/threads/${message.channel.id}.json`)
             await message.channel.delete();
@@ -15,7 +16,7 @@ async function threads(cleverbot, message) {
             message.reply(system_message("thd_err_unauth")) //You can't do that!
         }
     } else if (message.content == "--reset-convo") {
-        if (message.author == thisthread.author) {
+        if (message.author == thisthread.author || message.author.permissions.has(PermissionsBitField.Flags.ManageThreads)) {
             thisthread.context = []
             thisthread = JSON.stringify(thisthread)
             fs.writeFileSync(`./convos/threads/${message.channel.id}.json`, thisthread)
