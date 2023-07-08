@@ -10,6 +10,8 @@ function system_message(type){
 ***===============================================***`} break;
         case 'dm_can_use': {msg += `✅ You can now use Annoying Popup DMs!`} break;
         case 'dm_err': {msg += `⚠️ Hey there! I'm unable to DM you! Please check your DM settings.`} break;
+        case 'err_banned': {msg += `❌ You are banned from using this bot due to spamming. Please contact stuartt about clearing this ban.`} break;
+        case 'err_rate_limit': {msg += `❌ We have been rate limited by cleverbot, so all functions relying on cleverbot are non-functional right now.`} break;
         case 'dm_export': {msg += `✅ DM exported!
         
 This is a JSON array that contains the message history between you and Cleverbot. Each even line is your message, each odd line is a Cleverbot message.`} break;

@@ -4,7 +4,14 @@ const { Client, GatewayIntentBits, Partials, ActivityType } = require('discord.j
 const { clientId, token, allowedChannels, readChannels } = require('./config.json');
 const { system_message } = require('./system_messages.js')
 const Markov = require('js-markov');
-const cleverbot = require("cleverbot-free");
+const bannedList = require('./banned.json')
+//const cleverbot = require("cleverbot-free");
+
+let cooldownPeeps = new Array();
+
+async function cleverbot() {
+    return system_message("err_rate_limit")
+}
 
 const client = new Client({
 	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.DirectMessages],
@@ -39,6 +46,8 @@ client.once('ready', async() => {
  */
 client.on('messageCreate', async message => {
 	if (message.author.bot) return;
+
+    if (bannedList.includes(message.author.id) || cooldownPeeps.includes(message.author.id)) return;
 
 	//check if sentence contains @everyone or @here
 	if (message.content.includes('@everyone') || message.content.includes('@here')) return;
