@@ -5,13 +5,9 @@ const { clientId, token, allowedChannels, readChannels } = require('./config.jso
 const { system_message } = require('./system_messages.js')
 const Markov = require('js-markov');
 const bannedList = require('./banned.json')
-//const cleverbot = require("cleverbot-free");
+const cleverbot = require("cleverbot-free");
 
 let cooldownPeeps = new Array();
-
-async function cleverbot() {
-    return system_message("err_rate_limit")
-}
 
 const client = new Client({
 	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.DirectMessages],
